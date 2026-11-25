@@ -152,4 +152,7 @@ def run(job, output, index=None):
             encoder.wait()
 
 if __name__=="__main__":
+    if len(sys.argv) == 2 and sys.argv[1] in ("--tiktok-connect", "--tiktok-draft"):
+        import tiktok
+        sys.exit(tiktok.run(sys.argv[1]))
     run(Path(sys.argv[1]),Path(sys.argv[2]),int(sys.argv[3]) if len(sys.argv)>3 else None)

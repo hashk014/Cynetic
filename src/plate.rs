@@ -234,6 +234,22 @@ fn render(
         Ok(json!({"done":true,"image":STANDARD.encode(bytes)}))
     }
 }
+pub fn tiktok(mode: &std::ffi::OsStr) -> Result<(), String> {
+    let work = TempDir::new().map_err(err)?;
+    let exe = work.path().join("cynetic-helper.exe");
+    fs::write(&exe, WORKER).map_err(err)?;
+    let status = Command::new(exe)
+        .creation_flags(0x08000000)
+        .arg(mode)
+        .status()
+        .map_err(err)?;
+    if status.success() {
+        Ok(())
+    } else {
+        Err("TikTok connection was not completed.".into())
+    }
+}
+
 pub fn from_cli(input: &std::ffi::OsStr, output: PathBuf) -> Result<(), String> {
     let scene: Scene = if input == "saltos" {
         (*ORIGINAL).clone()

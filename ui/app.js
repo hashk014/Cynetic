@@ -1065,6 +1065,8 @@ function init() {
   $("open").onclick = action(() => replaceWith(() => native("open")));
   $("save").onclick = action(() => save());
   $("export").onclick = exportMenu;
+  $("tiktok-connect").onclick = action(() => native("tiktokConnect"));
+  $("tiktok-draft").onclick = action(() => native("tiktokDraft"));
   $("close-dialog").onclick = closeDialog;
   $("dialog").oncancel = (e) => {
     if (exporting) {

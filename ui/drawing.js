@@ -27,6 +27,8 @@ const icons = {
   sheet: '<path d="M5 3h10l4 4v14H5zM15 3v5h4M8 12h8m-8 4h6"/>',
   folder: '<path d="M3 7V5h6l2 2h10v3M3 9h18l-3 10H4z"/>',
   save: '<path d="M4 3h13l3 3v15H4zM8 3v6h8V3m-9 18v-8h10v8"/>',
+  link: '<path d="m10 7 2-2a5 5 0 0 1 7 7l-2 2M14 17l-2 2a5 5 0 0 1-7-7l2-2m2 5 6-6"/>',
+  send: '<path d="m3 10 18-7-6 18-4-8-8-3Zm8 3L21 3"/>',
   export:
     '<path d="M12 15V3m-4 4 4-4 4 4M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',

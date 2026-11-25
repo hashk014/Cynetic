@@ -368,6 +368,11 @@ impl Files {
 }
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<_> = std::env::args_os().collect();
+    if let [_, mode] = args.as_slice()
+        && (mode == "--tiktok-connect" || mode == "--tiktok-draft")
+    {
+        return plate::tiktok(mode).map_err(Into::into);
+    }
     if args.get(1).is_some_and(|arg| arg == "--render-plate") {
         if args.len() != 4 {
             return Err("Usage : --render-plate <saltos|projet> <sortie.mp4|png>".into());
@@ -473,6 +478,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         generation.fetch_add(1, Ordering::Relaxed);
                     }
                     let result = match r.op.as_str() {
+                        "tiktokConnect" | "tiktokDraft" => std::env::current_exe()
+                            .and_then(|exe| {
+                                let mode = if r.op == "tiktokConnect" {
+                                    "--tiktok-connect"
+                                } else {
+                                    "--tiktok-draft"
+                                };
+                                Command::new(exe).arg(mode).spawn()
+                            })
+                            .map(|mut child| {
+                                thread::spawn(move || {
+                                    let _ = child.wait();
+                                });
+                                Value::Null
+                            })
+                            .map_err(err),
                         "invalidate" => Ok(Value::Null),
                         "minimize" => {
                             window.set_minimized(true);

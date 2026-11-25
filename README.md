@@ -34,6 +34,14 @@ Choose **+** from the top-left menu to open a blank sheet. Select a part from th
 
 The **wheel** icon in the menu opens the mechanics editor and the vertical **Saltos** example, which features a rolling disk, a double pendulum, and motion analysis tools. Portrait movies export at **2160 × 3840, 60 fps**, and portrait PNGs use the same resolution.
 
+## Send a video to your TikTok sandbox
+
+1. Register your own desktop app, add **Login Kit** and **Content Posting API**, enable `video.upload`, and add your TikTok account as a sandbox target user. Register the redirect URI `http://127.0.0.1:3455/callback/`, including its trailing slash. [TikTok sandbox setup](https://developers.tiktok.com/docs/en/add-a-sandbox)
+2. In the Cynetic file menu, click the **chain link**. Enter the sandbox client key and client secret in the local dialog. The system browser opens TikTok for account selection and consent. Check that it shows the intended account.
+3. Click the **paper plane** in the file menu, choose an exported MP4 and confirm the transfer. Once TikTok confirms delivery, open your inbox to review and publish the draft. [TikTok inbox uploads](https://developers.tiktok.com/docs/en/content-posting-api-get-started-upload-content)
+
+The local sandbox credentials and tokens are encrypted for the current Windows user with DPAPI. Each developer uses their own sandbox credentials. To switch accounts, click the chain link again. To remove access, revoke Cynetic in TikTok and remove `%LOCALAPPDATA%\Cynetic\tiktok-sandbox.dpapi` from your PC. The editor commands are also available as `Cynetic.exe --tiktok-connect` and `Cynetic.exe --tiktok-draft` for connecting and sending a draft respectively.
+
 ## Run on Windows
 
 The interface uses Microsoft Edge WebView2. Video export requires FFmpeg on the Windows `PATH`, with the `libx264` H.264 encoder. If you need FFmpeg, install it with the following command, then restart Cynetic.
@@ -54,7 +62,7 @@ To render from PowerShell, put the downloaded executable and project in the same
 On Windows x64, install stable Rust for MSVC, the Visual Studio C++ Build Tools, the Windows SDK, and Python 3. The build embeds the Python-based Saltos renderer in the executable.
 
 ```powershell
-python -m pip install pyinstaller numpy pillow
+python -m pip install pyinstaller numpy pillow pywin32
 cargo test --release --locked
 cargo build --release --locked
 .\target\release\Cynetic.exe

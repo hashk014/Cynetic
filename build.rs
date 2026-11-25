@@ -4,6 +4,7 @@ fn main() {
     println!("cargo:rerun-if-changed=ui/icon.ico");
     println!("cargo:rerun-if-changed=plate/render.py");
     println!("cargo:rerun-if-changed=plate/ink.py");
+    println!("cargo:rerun-if-changed=plate/tiktok.py");
     winresource::WindowsResource::new()
         .set_icon("ui/icon.ico")
         .compile()
@@ -28,8 +29,6 @@ fn main() {
             "scipy",
             "--exclude-module",
             "matplotlib",
-            "--exclude-module",
-            "tkinter",
             "--exclude-module",
             "IPython",
             "--exclude-module",

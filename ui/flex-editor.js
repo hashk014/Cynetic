@@ -590,6 +590,8 @@ const flexEditor = (() => {
       button("new", "Construire sur une feuille vide", "plus") +
       button("ref", "Ouvrir le mécanisme de référence", "beamPart") +
       button("legacy", "Atelier de mécanique et Saltos", "wheel") +
+      button("connect", "Connect TikTok sandbox", "link") +
+      button("draft", "Send MP4 to TikTok inbox", "send") +
       button("open", "Ouvrir un projet", "folder") +
       button("save", "Enregistrer le projet", "save") +
       button("undo", "Annuler", "undo") +
@@ -644,6 +646,8 @@ const flexEditor = (() => {
     get("new").onclick = action(() => fresh(scratch));
     get("ref").onclick = action(() => fresh(() => copy(templateDoc)));
     get("legacy").onclick = action(() => fresh(() => clone(saltosPreset)));
+    get("connect").onclick = action(() => native("tiktokConnect"));
+    get("draft").onclick = action(() => native("tiktokDraft"));
     get("open").onclick = action(() => switchProject(() => native("open")));
     get("save").onclick = action(() => save());
     get("undo").onclick = () => undo();
