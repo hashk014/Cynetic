@@ -527,7 +527,7 @@ const flexEditor = (() => {
     try {
       if (!batch) {
         modal(
-          "Exporter à 30 images par seconde",
+          "Exporter en UHD à 60 images par seconde",
           icon("film") +
             '<progress id="fx-progress" class="progress" aria-label="Encodage"></progress>' +
             button("cancel", "Annuler", "close"),
@@ -538,13 +538,24 @@ const flexEditor = (() => {
       if (!path) return false;
       started = true;
       const out = document.createElement("canvas");
-      out.width = 1080;
-      out.height = 720;
+      out.width = 3840;
+      out.height = 2160;
       const c = out.getContext("2d", { alpha: false });
+      c.fillStyle = "#fdfdfd";
+      c.fillRect(0, 0, out.width, out.height);
+      // Center the 3:2 drawing on the 16:9 sheet, preserving its geometry.
+      const scale = out.height / 720;
+      c.translate((out.width - 1080 * scale) / 2, 0);
+      c.scale(scale, scale);
+      c.beginPath();
+      c.rect(0, 0, 1080, 720);
+      c.clip();
+      // Existing project keys use a 30 Hz clock. Sample them at 60 Hz.
+      const outputFrames = doc.count * 2;
       const prog = get("progress");
-      if (prog) prog.max = doc.count;
-      for (let i = 0; i < doc.count && !cancel; i++) {
-        D.draw(c, doc, i);
+      if (prog) prog.max = outputFrames;
+      for (let i = 0; i < outputFrames && !cancel; i++) {
+        D.draw(c, doc, Math.min(i / 2, doc.count - 1));
         await native("videoFrame", out.toDataURL("image/png").split(",")[1]);
         if (prog) prog.value = i + 1;
       }

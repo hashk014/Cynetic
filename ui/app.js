@@ -776,8 +776,8 @@ async function save(as = false) {
 }
 function exportCanvas(bb) {
   const out = document.createElement("canvas");
-  out.width = 1080;
-  out.height = 1920;
+  out.width = 2160;
+  out.height = 3840;
   const c = out.getContext("2d", { alpha: false }),
     [l, r, t, b] = bb;
   const scale = Math.min(
@@ -797,8 +797,8 @@ function exportCanvas(bb) {
       c.scale(scale, scale);
       render(c, scene, pose, { trace: trail });
       drawVectors(c, pose);
-      c.setTransform(1, 0, 0, 1, 0, 0);
-      drawPortrait(c, f, out.width - 300, 72, 218);
+      c.setTransform(2, 0, 0, 2, 0, 0);
+      drawPortrait(c, f, out.width / 2 - 300, 72, 218);
     },
   };
 }
@@ -952,7 +952,7 @@ function exportMenu() {
         "export-analysis",
         "phase",
         "Vidéo MP4 avec analyse",
-        scene.duration + " s · 1080 × 1920 · 60 i/s · muette",
+        scene.duration + " s · 2160 × 3840 · 60 i/s · muette",
       ),
   );
   $("export-png").onclick = action(exportPng);

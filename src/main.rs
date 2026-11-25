@@ -103,11 +103,11 @@ impl Video {
             "image2pipe",
             "-framerate",
         ]);
-        if landscape.is_some() {
-            cmd.args(["30", "-c:v", "png"]);
-        } else {
-            cmd.args(["60", "-c:v", "mjpeg"]);
-        }
+        cmd.args([
+            "60",
+            "-c:v",
+            if landscape.is_some() { "png" } else { "mjpeg" },
+        ]);
         cmd.args(["-i", "pipe:0"]);
         if let Some(path) = audio {
             cmd.arg("-i")

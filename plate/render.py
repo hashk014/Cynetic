@@ -117,7 +117,7 @@ class Plate:
                 p.label(xy+(0,8),"m",str(counters[k]),size=26)
         if self.gravity:
             p.arrow((948,586),(948,646),2,12);p.label((975,629),"g",size=31)
-        return im.resize((WIDTH,HEIGHT),Image.Resampling.LANCZOS)
+        return im.resize(ink.OUTPUT_SIZE,Image.Resampling.LANCZOS)
 
 def run(job, output, index=None):
     scene=json.loads((job/"scene.json").read_text(encoding="utf8"))
@@ -135,7 +135,7 @@ def run(job, output, index=None):
         draw(index).save(output,format="PNG")
         return
     cmd=["ffmpeg","-hide_banner","-loglevel","error","-y","-f","rawvideo","-pixel_format","gray",
-         "-video_size","1080x1920","-framerate","60","-i","pipe:0","-an","-c:v","libx264",
+         "-video_size",f"{ink.OUTPUT_SIZE[0]}x{ink.OUTPUT_SIZE[1]}","-framerate",str(FPS),"-i","pipe:0","-an","-c:v","libx264",
          "-preset","fast","-crf","15","-pix_fmt","yuv420p","-movie_timescale","60000",
          "-video_track_timescale","60000","-movflags","+faststart","-f","mp4",str(output)]
     with subprocess.Popen(cmd,stdin=subprocess.PIPE,creationflags=getattr(subprocess,"CREATE_NO_WINDOW",0)) as encoder:

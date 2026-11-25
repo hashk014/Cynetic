@@ -13,7 +13,7 @@ Cynetic is a Windows app for drawing and animating mechanical systems. Place the
 3. To try a different motion, select a part and open the **sliders**. Adjust its mass, the beam stiffness, or the initial angular kick. Click the **wave** to recalculate from the first frame. Use **Ctrl+Z** to recover the previous motion.
 4. Toggle **dimensions** to show or hide mathematical annotations. Toggle the **arrow** to show velocity vectors for the bob and block. Each vector shows how far the part would travel in one tenth of a second at its estimated instantaneous velocity.
 5. To add sound, click the **musical note** and pick an audio file or a local copy of the reference video. Select the track again if you reopen the project.
-6. Press **Ctrl+S** to save the editable project. Click the **filmstrip** to export the video. The example contains 460 frames at 1080 × 720 and 30 fps, for a running time of 15.33 seconds.
+6. Press **Ctrl+S** to save the editable project. Click the **filmstrip** to export the video. The example exports directly at **3840 × 2160 (4K UHD), 60 fps**. Cynetic draws 920 frames over 15.33 seconds, sampling the original 30 Hz motion tracks at half-frame intervals. The 3:2 diagram is centered on a 16:9 sheet with matching margins on both sides.
 
 The example stores the beam shape, clamp position, and block motion measured from the reference footage. Cynetic redraws each frame from that data. Recalculating uses a single bending mode, a prescribed clamp motion, and collisions between the bob and block. The marked section of the rail uses the friction coefficient shown in the diagram.
 
@@ -32,7 +32,7 @@ Choose **+** from the top-left menu to open a blank sheet. Select a part from th
 | **Ctrl+Z** / **Ctrl+Y** | Undo or redo |
 | **Ctrl+Shift+S** | Save a copy |
 
-The **wheel** icon in the menu opens the mechanics editor and the vertical **Saltos** example, which features a rolling disk, a double pendulum, and motion analysis tools.
+The **wheel** icon in the menu opens the mechanics editor and the vertical **Saltos** example, which features a rolling disk, a double pendulum, and motion analysis tools. Portrait movies export at **2160 × 3840, 60 fps**, and portrait PNGs use the same resolution.
 
 ## Run on Windows
 
@@ -66,6 +66,12 @@ The UI smoke test starts with a blank sheet, places parts with the mouse, animat
 python -m pip install playwright
 python -m playwright install chromium
 python tests/editor_smoke.py
+```
+
+With the release executable built and FFmpeg on the Windows `PATH`, run the export test to check both orientations, frame counts, and the interpolated position of a moving bob in the encoded video.
+
+```powershell
+python tests/export_uhd.py
 ```
 
 ## Project format and motion tracking

@@ -6,7 +6,10 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
+# Layout coordinates remain independent of the output raster.
 WIDTH, HEIGHT, FPS, AA = 1080, 1920, 60, 3
+OUTPUT_SCALE = 2
+OUTPUT_SIZE = (WIDTH * OUTPUT_SCALE, HEIGHT * OUTPUT_SCALE)
 BLACK, WHITE = 0, 255
 FLOOR, TOP = 1017., 959.
 START, END = 216., 864.
@@ -212,6 +215,7 @@ def make_frame(q, coordinates, past, rig=None, gravity=True, spring_subscripts=(
     # Restrict the supersampling pass to the illustrated portion of the white sheet.
     top,bottom=(530,1500) if rig is None else (0,HEIGHT)
     diagram=image.crop((0,top*AA,WIDTH*AA,bottom*AA))
-    output=Image.new('L',(WIDTH,HEIGHT),WHITE)
-    output.paste(diagram.resize((WIDTH,bottom-top),Image.Resampling.LANCZOS),(0,top))
+    output=Image.new('L',OUTPUT_SIZE,WHITE)
+    strip_size = (OUTPUT_SIZE[0], (bottom-top)*OUTPUT_SCALE)
+    output.paste(diagram.resize(strip_size,Image.Resampling.LANCZOS),(0,top*OUTPUT_SCALE))
     return output
