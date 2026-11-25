@@ -1,48 +1,57 @@
 # Cynetic
 
-Atelier de mécanique pour Windows, en Rust avec une interface intégrée. Construisez un schéma à la souris, animez ses pièces et exportez le résultat en MP4. Au premier lancement, la scène présente une lame flexible traversant une pince coulissante, une bille et un bloc sur un rail circulaire.
+Cynetic is a Windows app for drawing and animating mechanical systems. Place the parts, set their motion on a timeline, and export an MP4. The editor is written in Rust with an embedded, icon-only interface.
 
-[Télécharger Cynetic pour Windows](https://github.com/hashk014/Cynetic/releases/latest/download/Cynetic.exe) · [Voir le film exporté](https://github.com/hashk014/Cynetic/releases/latest/download/Cantilever.mp4) · [Ouvrir le projet exemple](projects/Cantilever.cynetic)
+[Download Cynetic for Windows](https://github.com/hashk014/Cynetic/releases/latest/download/Cynetic.exe) · [Watch the example film](https://github.com/hashk014/Cynetic/releases/latest/download/Cantilever.mp4) · [Download the editable project](https://github.com/hashk014/Cynetic/releases/latest/download/Cantilever.cynetic)
 
-![L’atelier Cynetic ouvert sur le mécanisme à lame flexible](docs/atelier.png)
+![Cynetic showing a flexible cantilever in a sliding clamp, a bob at its tip, and a block on a curved track](docs/editor.png)
 
-## Refaire le film
+## Recreate the example film
 
-1. Lancez `Cynetic.exe`. Le bouton **lecture** anime la scène. Pour retrouver le modèle après une modification, ouvrez le menu en haut à gauche et cliquez sur la lame avec la bille.
-2. Glissez le curseur de temps jusqu’à une image. Déplacez la bille, la pince ou le bloc directement sur le schéma. Le geste enregistre une pose à cette image et Cynetic interpole le mouvement entre deux poses. Déplacer l’appui ou le rail change le montage pour tout le film.
-3. Pour changer la physique, sélectionnez une pièce et ouvrez ses réglages avec l’icône **curseurs**. Ajustez la masse, la rigidité ou l’impulsion initiale, puis cliquez sur **l’onde** pour recalculer le mouvement depuis la première pose. Cette opération est annulable.
-4. L’icône **cote** masque ou affiche les annotations mathématiques. L’icône **flèche** ajoute les vecteurs vitesse de la bille et du bloc. La longueur d’une flèche correspond au déplacement en un dixième de seconde à la vitesse instantanée estimée.
-5. Pour joindre du son, cliquez sur la **note** et sélectionnez un fichier audio ou le MP4 de référence sur votre ordinateur. La piste est associée à la session et doit être resélectionnée après réouverture du projet.
-6. Enregistrez le projet avec **Ctrl+S**, puis cliquez sur la **pellicule** en haut pour exporter. Le modèle produit 460 images en 1080 × 720 à 30 images/s, soit 15,33 secondes.
+1. Open `Cynetic.exe` and press **Play**. The built-in project tracks a bob on the end of a flexible beam as it strikes a block on a curved rail. To reopen the example later, choose the **beam and bob** icon in the top-left menu.
+2. Scrub to a frame and drag the bob, clamp, or block. Each drag sets a keyframe for that part. Cynetic interpolates between keyframes. Moving the support or rail changes its position throughout the film.
+3. To try a different motion, select a part and open the **sliders**. Adjust its mass, the beam stiffness, or the initial angular kick. Click the **wave** to recalculate from the first frame. Use **Ctrl+Z** to recover the previous motion.
+4. Toggle **dimensions** to show or hide mathematical annotations. Toggle the **arrow** to show velocity vectors for the bob and block. Each vector shows how far the part would travel in one tenth of a second at its estimated instantaneous velocity.
+5. To add sound, click the **musical note** and pick an audio file or a local copy of the reference video. Select the track again if you reopen the project.
+6. Press **Ctrl+S** to save the editable project. Click the **filmstrip** to export the video. The example contains 460 frames at 1080 × 720 and 30 fps, for a running time of 15.33 seconds.
 
-Le projet intégré contient les positions relevées dans la vidéo, la forme de la lame, la géométrie du rail et les cotes. Chaque image est redessinée. La commande de recalcul utilise une approximation physique à un mode de flexion, une pince à mouvement imposé et des chocs entre la bille et le bloc. Elle sert à explorer des variantes du mouvement. La zone marquée du rail reprend le coefficient de frottement du schéma de référence.
+The example stores the beam shape, clamp position, and block motion measured from the reference footage. Cynetic redraws each frame from that data. Recalculating uses a single bending mode, a prescribed clamp motion, and collisions between the bob and block. The marked section of the rail uses the friction coefficient shown in the diagram.
 
-## Partir de zéro
+## Build a mechanism from scratch
 
-Ouvrez le menu et choisissez **+**. Dans la palette du bas, sélectionnez tour à tour l’appui, la lame, la pince, la bille, le rail et le bloc, puis cliquez sur la feuille pour placer chaque pièce. Vous pouvez aussi utiliser seulement les pièces dont vous avez besoin. La bille suit l’extrémité de la lame et le bloc se déplace le long du rail.
+Choose **+** from the top-left menu to open a blank sheet. Select a part from the bottom toolbar, then click the sheet to place it. The six parts are the support, beam, sliding clamp, bob, rail, and block. The bob follows the beam tip, and the block moves along the rail.
 
-Le losange ajoute une pose sur la piste sélectionnée. Le losange barré retire la pose de l’image courante. Dans les réglages, le flocon fige une piste à sa position actuelle et la corbeille retire une pièce. Le curseur d’horloge règle la durée du film. **Espace** commande la lecture, **← / →** avance d’une image, **Ctrl+Z / Ctrl+Y** annule ou rétablit, et **Ctrl+Maj+S** enregistre une copie.
+| Control | Action |
+| --- | --- |
+| Diamond / diamond with a minus | Add or remove a keyframe on the selected track |
+| Snowflake in part settings | Freeze the selected track at its current pose |
+| Trash can in part settings | Remove the selected part |
+| Clock slider | Set the film length in frames |
+| **Space** | Play or pause |
+| **←** / **→** | Step back or forward one frame |
+| **Ctrl+Z** / **Ctrl+Y** | Undo or redo |
+| **Ctrl+Shift+S** | Save a copy |
 
-L’icône de roue dans le menu ouvre aussi l’atelier de mécanique et le projet vertical **Saltos**, avec disque roulant, double pendule et outils d’analyse.
+The **wheel** icon in the menu opens the mechanics editor and the vertical **Saltos** example, which features a rolling disk, a double pendulum, and motion analysis tools.
 
-## Exécuter sur Windows
+## Run on Windows
 
-L’interface utilise Microsoft Edge WebView2. L’export nécessite FFmpeg avec l’encodeur H.264 `libx264` sur le `PATH`. Sous Windows, la commande suivante installe FFmpeg si nécessaire. Relancez Cynetic après l’installation.
+The interface uses Microsoft Edge WebView2. Video export requires FFmpeg on the Windows `PATH`, with the `libx264` H.264 encoder. If you need FFmpeg, install it with the following command, then restart Cynetic.
 
 ```powershell
 winget install --id Gyan.FFmpeg -e
 ```
 
-Depuis PowerShell, ces commandes rendent le projet fourni, puis une version avec votre piste locale. Le chemin du MP4 supplémentaire est à adapter.
+To render from PowerShell, put the downloaded executable and project in the same directory and run either command. The second example takes its soundtrack from a local video.
 
 ```powershell
 .\Cynetic.exe --render-flex .\Cantilever.cynetic .\Film.mp4 | Out-Null
-.\Cynetic.exe --render-flex .\Cantilever.cynetic .\Film-sonore.mp4 "C:\Films\reference.mp4" | Out-Null
+.\Cynetic.exe --render-flex .\Cantilever.cynetic .\Film-with-audio.mp4 "C:\Videos\reference.mp4" | Out-Null
 ```
 
-## Compiler et vérifier
+## Build and test
 
-Sur Windows x64, installez Rust stable pour MSVC, les outils de compilation Visual Studio C++, le Windows SDK et Python 3. Le moteur historique de rendu de Saltos est embarqué dans l’exécutable à la compilation.
+On Windows x64, install stable Rust for MSVC, the Visual Studio C++ Build Tools, the Windows SDK, and Python 3. The build embeds the Python-based Saltos renderer in the executable.
 
 ```powershell
 python -m pip install pyinstaller numpy pillow
@@ -51,7 +60,7 @@ cargo build --release --locked
 .\target\release\Cynetic.exe
 ```
 
-Le test d’interface construit une scène vide à la souris, anime la bille, active les vecteurs puis vérifie l’enregistrement et l’historique.
+The UI smoke test starts with a blank sheet, places parts with the mouse, animates the bob, enables velocity vectors, and checks saving, undo, and redo.
 
 ```powershell
 python -m pip install playwright
@@ -59,11 +68,13 @@ python -m playwright install chromium
 python tests/editor_smoke.py
 ```
 
-Les sources de l’éditeur et du dessin sont dans `ui/`, le modèle de données et le calcul de flexion dans `src/flex.rs` et `src/flex/`. Le projet `.cynetic` est du JSON. Les pistes contiennent l’indice d’image, les positions et les points de contrôle, dans le repère du dessin.
+## Project format and motion tracking
 
-Pour refaire la mesure sur une copie locale de la vidéo d’origine en 1080 × 720, utilisez le script calibré pour cette prise de vue.
+The editor and drawing code live in `ui/`. The Rust project model and bending calculation live in `src/flex.rs` and `src/flex/`. A `.cynetic` project is a JSON file. Each track stores frame numbers, positions, and control points in drawing coordinates. [View the example project](projects/Cantilever.cynetic).
+
+To repeat the measurements on a local copy of the original 1080 × 720 video, run the tracking script calibrated for that shot.
 
 ```powershell
 python -m pip install opencv-python numpy scipy
-python tools/trace_cantilever.py "C:\Films\reference.mp4" Mesure.cynetic
+python tools/trace_cantilever.py "C:\Videos\reference.mp4" Measured.cynetic
 ```
