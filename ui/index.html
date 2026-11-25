@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cynetic</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="scenes.js"></script>
+    <script defer src="drawing.js"></script>
+    <script defer src="analysis.js"></script>
+    <link rel="stylesheet" href="flex.css"/>
+    <script defer src="cantilever.js"></script>
+    <script defer src="flex-editor.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <section id="flexdesk" hidden aria-label="Atelier de la lame flexible"></section>
+    <main id="stage">
+      <canvas
+        id="plan"
+        tabindex="0"
+        aria-label="Plan mécanique interactif"
+      ></canvas>
+    </main>
+    <div id="window-bar">
+      <button
+        id="menu"
+        data-icon="menu"
+        aria-label="Fichiers et modèles"
+      ></button
+      ><button
+        id="focus"
+        data-icon="focus"
+        aria-label="Masquer les commandes"
+      ></button
+      ><button
+        id="math"
+        data-icon="velocity"
+        aria-label="Vecteurs et portrait de phase"
+      ></button>
+      <button
+        id="plate"
+        data-icon="film"
+        aria-label="Produire une vidéo comme Saltos"
+      ></button>
+      <div id="grip"></div>
+      <button id="minimize" data-icon="minimize" aria-label="Réduire"></button
+      ><button id="maximize" data-icon="maximize" aria-label="Agrandir"></button
+      ><button id="close" data-icon="close" aria-label="Fermer"></button>
+    </div>
+    <nav id="files" hidden aria-label="Fichiers">
+      <button id="new" data-icon="plus" aria-label="Nouveau schéma"></button
+      ><button id="models" data-icon="book" aria-label="Modèles"></button
+      ><button id="open" data-icon="folder" aria-label="Ouvrir"></button
+      ><button id="save" data-icon="save" aria-label="Enregistrer"></button
+      ><button id="export" data-icon="export" aria-label="Exporter"></button>
+    </nav>
+    <div id="context">
+      <button id="undo" data-icon="undo" aria-label="Annuler"></button
+      ><button id="redo" data-icon="redo" aria-label="Rétablir"></button
+      ><button id="fit" data-icon="fit" aria-label="Cadrer"></button
+      ><button id="settings" data-icon="sliders" aria-label="Réglages"></button>
+    </div>
+    <nav id="math-tools" hidden aria-label="Grandeurs physiques"></nav>
+    <div id="properties" hidden></div>
+    <div id="dock">
+      <button id="pointer" data-icon="pointer" aria-label="Sélection"></button
+      ><span class="divider"></span>
+      <div id="tools"></div>
+      <span class="divider"></span
+      ><button id="play" data-icon="play" aria-label="Lecture"></button>
+    </div>
+    <div id="transport" hidden>
+      <button
+        id="rewind"
+        data-icon="rewind"
+        aria-label="Revenir au début"
+      ></button
+      ><button
+        id="previous"
+        data-icon="previous"
+        aria-label="Image précédente"
+      ></button
+      ><input
+        id="scrub"
+        type="range"
+        min="0"
+        max="2100"
+        value="0"
+        aria-label="Position de lecture"
+      /><button id="next" data-icon="next" aria-label="Image suivante"></button>
+    </div>
+    <dialog id="dialog" aria-label="Options">
+      <div id="dialog-body"></div>
+      <button id="close-dialog" data-icon="close" aria-label="Fermer"></button>
+    </dialog>
+    <div id="toast" hidden role="status"></div>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+body.flex-mode > :not(#flexdesk):not(#dialog):not(#toast) {
+  display: none !important;
+}
+#flexdesk {
+  position: absolute;
+  inset: 0;
+  background: #fdfdfd;
+  color: #000;
+}
+#fx-canvas {
+  position: absolute;
+  top: 38px;
+  bottom: 94px;
+  width: 100%;
+  height: calc(100% - 132px);
+  touch-action: none;
+  outline: none;
+}
+#fx-top,
+#fx-menu-panel,
+#fx-dock,
+#fx-time,
+#fx-props {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+#fx-top {
+  top: 6px;
+  left: 10px;
+  right: 10px;
+}
+#fx-top button,
+#fx-menu-panel button {
+  width: 32px;
+  height: 32px;
+}
+#fx-top svg,
+#fx-menu-panel svg,
+#fx-time svg {
+  width: 17px;
+  height: 17px;
+}
+#fx-grip {
+  flex: 1;
+  height: 30px;
+}
+#fx-menu-panel,
+#fx-dock,
+#fx-props {
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 28px;
+  padding: 4px;
+}
+#fx-menu-panel {
+  left: 12px;
+  top: 45px;
+  z-index: 2;
+}
+#fx-dock,
+#fx-time {
+  left: 50%;
+  transform: translateX(-50%);
+}
+#fx-dock {
+  bottom: 12px;
+}
+#fx-dock button {
+  width: 35px;
+  height: 35px;
+}
+#fx-dock svg {
+  width: 20px;
+  height: 20px;
+}
+#fx-time {
+  bottom: 62px;
+}
+#fx-time button {
+  height: 28px;
+  width: 28px;
+}
+#fx-clock {
+  width: min(32vw, 260px);
+}
+#fx-props {
+  right: 12px;
+  bottom: 65px;
+  flex-direction: column;
+  padding: 10px;
+  width: 196px;
+  border-radius: 14px;
+}
+#fx-props label {
+  width: 100%;
+}
+#fx-props button {
+  width: 30px;
+  height: 30px;
+}
+#fx-props svg {
+  width: 17px;
+  height: 17px;
+}

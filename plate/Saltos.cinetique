@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "name": "Saltos — 124 BPM",
+  "gravity": 29.447556541388124,
+  "bpm": 124,
+  "duration": 35,
+  "nodes": [
+    {
+      "id": 1,
+      "kind": "anchor",
+      "name": "Appui gauche",
+      "parent": null,
+      "x": -1.8786206896551723,
+      "y": 0,
+      "mass": 1,
+      "radius": 0.28,
+      "width": 3,
+      "length": 1.4,
+      "angle": 0,
+      "eccentric": 0.45,
+      "speed": 0
+    },
+    {
+      "id": 2,
+      "kind": "anchor",
+      "name": "Appui droit",
+      "parent": null,
+      "x": 1.8786206896551723,
+      "y": 0,
+      "mass": 1,
+      "radius": 0.28,
+      "width": 3,
+      "length": 1.4,
+      "angle": 0,
+      "eccentric": 0.45,
+      "speed": 0
+    },
+    {
+      "id": 3,
+      "kind": "slider",
+      "name": "Plateau mobile",
+      "parent": null,
+      "x": 0.031819379501384894,
+      "y": 0,
+      "mass": 6.7,
+      "radius": 0.28,
+      "width": 2.6813793103448273,
+      "length": 1.4,
+      "angle": 0,
+      "eccentric": 0.45,
+      "speed": -0.17215663681018528
+    },
+    {
+      "id": 4,
+      "kind": "wheel",
+      "name": "Disque roulant",
+      "parent": 3,
+      "x": -0.11138706159087561,
+      "y": 0,
+      "mass": 2.05,
+      "radius": 0.3558620689655172,
+      "width": 3,
+      "length": 1.4,
+      "angle": 23.2637786295219,
+      "eccentric": 0.37209302325581395,
+      "speed": 4.168084192221039
+    },
+    {
+      "id": 5,
+      "kind": "arm",
+      "name": "Premier bras",
+      "parent": 4,
+      "x": 0,
+      "y": 0,
+      "mass": 1.15,
+      "radius": 0.28,
+      "width": 3,
+      "length": 0.7406896551724137,
+      "angle": -28.90803012497162,
+      "eccentric": 0.45,
+      "speed": -7.245787786264043
+    },
+    {
+      "id": 6,
+      "kind": "arm",
+      "name": "Second bras",
+      "parent": 5,
+      "x": 0,
+      "y": 0,
+      "mass": 0.88,
+      "radius": 0.28,
+      "width": 3,
+      "length": 0.6910344827586207,
+      "angle": 32.56170858707945,
+      "eccentric": 0.45,
+      "speed": -3.3621495880419565
+    }
+  ],
+  "springs": [
+    {
+      "id": 7,
+      "name": "Ressort gauche",
+      "a": 1,
+      "b": 3,
+      "stiffness": 370.27283884528725,
+      "rest": 0.5379310344827586
+    },
+    {
+      "id": 8,
+      "name": "Ressort droit",
+      "a": 3,
+      "b": 2,
+      "stiffness": 370.27283884528725,
+      "rest": 0.5379310344827586
+    }
+  ]
+}
